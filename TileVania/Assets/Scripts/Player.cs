@@ -6,22 +6,26 @@ public class Player : MonoBehaviour
 {
     //config
     [SerializeField] float runSpeed = 5f;
+    [SerializeField] float jumpForce = 10f;
 
     //state
 
     //cached
     Rigidbody2D myRigidbody;
     Animator myAnimator;
+    Collider2D myCollider;
 
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        myCollider = GetComponent<Collider2D>();
     }
 
     void Update()
     {
         Run();
+        Jump();
         FlipSprite();
     }
 
@@ -33,6 +37,17 @@ public class Player : MonoBehaviour
 
         bool playerMoving = Mathf.Abs(myRigidbody.velocity.x) > Mathf.Epsilon;       
         myAnimator.SetBool("running", playerMoving);       
+    }
+
+    private void Jump()
+    {
+        if (myCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                myRigidbody.velocity += new Vector2(0f, jumpForce);
+            }
+        }
     }
 
     private void FlipSprite()
