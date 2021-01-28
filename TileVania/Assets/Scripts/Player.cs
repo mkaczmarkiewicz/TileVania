@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     //config
     [SerializeField] float runSpeed = 5f;
     [SerializeField] float jumpForce = 10f;
+    [SerializeField] float climbSpeed = 5f;
 
     //state
 
@@ -20,12 +21,14 @@ public class Player : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myCollider = GetComponent<Collider2D>();
+
     }
 
     void Update()
     {
         Run();
         Jump();
+        Climb();
         FlipSprite();
     }
 
@@ -47,6 +50,27 @@ public class Player : MonoBehaviour
             {
                 myRigidbody.velocity += new Vector2(0f, jumpForce);
             }
+        }
+    }
+
+    private void Climb()
+    {
+        if (myCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && Mathf.Abs(Input.GetAxis("Vertical")) > Mathf.Epsilon)
+        {
+
+            myAnimator.SetBool("climbing", true);
+
+            float controlThrow = Input.GetAxis("Vertical") * climbSpeed;
+            Vector2 playerVelocity = new Vector2(myRigidbody.velocity.x, controlThrow);
+            myRigidbody.velocity = playerVelocity;
+
+            runSpeed = 3f; //zeby nie spadać z drabiny
+        }
+        else
+        {
+            myAnimator.SetBool("climbing", false);
+
+            runSpeed = 5f;
         }
     }
 

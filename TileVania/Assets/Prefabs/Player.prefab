@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 174386577}
   - component: {fileID: 174386576}
   - component: {fileID: 2141092948}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,3 +166,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 5
   jumpForce: 16
+  climbSpeed: 5
