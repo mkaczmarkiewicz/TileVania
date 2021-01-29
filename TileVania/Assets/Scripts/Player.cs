@@ -14,13 +14,15 @@ public class Player : MonoBehaviour
     //cached
     Rigidbody2D myRigidbody;
     Animator myAnimator;
-    Collider2D myCollider;
+    CapsuleCollider2D myCollider;
+    BoxCollider2D myFeetCollider;
 
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
-        myCollider = GetComponent<Collider2D>();
+        myCollider = GetComponent<CapsuleCollider2D>();
+        myFeetCollider = GetComponent<BoxCollider2D>();
 
     }
 
@@ -44,7 +46,7 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        if (myCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             if (Input.GetButtonDown("Jump"))
             {
