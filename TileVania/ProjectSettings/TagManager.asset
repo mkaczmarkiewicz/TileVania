@@ -21,7 +21,7 @@ TagManager:
   - Enemy
   - Dead Player
   - Hazards
-  - 
+  - Interactables
   - 
   - 
   - 
@@ -47,6 +47,9 @@ TagManager:
     locked: 0
   - name: Hazards
     uniqueID: 2143731289
+    locked: 0
+  - name: Interactables
+    uniqueID: 3511150979
     locked: 0
   - name: Player
     uniqueID: 3728639139

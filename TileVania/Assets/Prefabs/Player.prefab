@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 365866540}
   m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -566328157
-  m_SortingLayer: 2
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1857188551261513057, guid: 7be032f3c5a511d4ea0f548cebf0a808,
     type: 3}
@@ -181,6 +181,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.027856648, y: -0.06093669}
-  m_Size: {x: 0.44286525, y: 0.8781266}
+  m_Offset: {x: -0.027856648, y: -0.012314796}
+  m_Size: {x: 0.44286525, y: 0.78088284}
   m_Direction: 0
