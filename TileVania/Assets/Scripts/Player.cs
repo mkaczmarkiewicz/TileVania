@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] float climbSpeed = 5f;
 
     //state
+    bool isAlive;
 
     //cached
     Rigidbody2D myRigidbody;
@@ -19,19 +20,28 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        isAlive = true;
+
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myCollider = GetComponent<CapsuleCollider2D>();
         myFeetCollider = GetComponent<BoxCollider2D>();
-
     }
 
     void Update()
     {
-        Run();
-        Jump();
-        Climb();
-        FlipSprite();
+        if (isAlive)
+        {
+            Run();
+            Jump();
+            Climb();
+            FlipSprite();
+            Die();
+        }
+        else
+        {
+            Respawn();
+        }
     }
 
     private void Run()
@@ -85,4 +95,51 @@ public class Player : MonoBehaviour
             transform.localScale = new Vector2 (Mathf.Sign(myRigidbody.velocity.x), 1f);
         }
     }
+
+    private void Die()
+    {
+        if (myCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")) || myCollider.IsTouchingLayers(LayerMask.GetMask("Hazards")))
+        {
+            isAlive = false; //zabiera graczowi kontrolę
+            myAnimator.SetBool("dying", true); //zaczyna animację umierania
+
+            myRigidbody.velocity = new Vector2(0f, jumpForce); //wystrzel gracza w górę
+
+            this.gameObject.layer = 13; //zmieniamy layer na "Dead Player" żeby Enemy nie wchodził z nim w interakcje          
+        }
+    }
+
+    private void Respawn()
+    {
+        if(Input.anyKeyDown)
+        {
+            isAlive = true;
+            myAnimator.SetBool("dying", false);
+
+            this.gameObject.layer = 10;
+        }
+    }
 }
+
+/*if (myRigidbody.velocity == new Vector2(0f, 0f)) //po tym jak się zatrzyma
+            {
+                myRigidbody.bodyType = RigidbodyType2D.Static; //statyczne rigidbody żeby ciało nie spadło przez mapę
+                myCollider.enabled = false; // wyłączamy oba collidery...
+                myFeetCollider.enabled = false; //...żeby przeciwnik się nie odbijał o ciało
+            }*/
+
+/* myFeetCollider.enabled = false; //...żeby przeciwnik się nie odbijał o ciało
+
+ if (myCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) //po tym jak się zatrzyma
+ {
+     myRigidbody.bodyType = RigidbodyType2D.Static; //statyczne rigidbody żeby ciało nie spadło przez mapę
+     myCollider.enabled = false; // wyłączamy oba collidery...
+
+     Debug.Log("a");
+ }*/
+
+/*
+myCollider.enabled = true;
+myFeetCollider.enabled = true;
+myRigidbody.bodyType = RigidbodyType2D.Dynamic;
+            */
