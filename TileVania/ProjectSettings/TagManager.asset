@@ -45,6 +45,9 @@ TagManager:
   - name: Background
     uniqueID: 2499012119
     locked: 0
+  - name: RisingWater
+    uniqueID: 1921284319
+    locked: 0
   - name: Hazards
     uniqueID: 2143731289
     locked: 0

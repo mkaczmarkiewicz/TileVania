@@ -117,6 +117,8 @@ public class Player : MonoBehaviour
             myAnimator.SetBool("dying", false);
 
             this.gameObject.layer = 10;
+
+            FindObjectOfType<GameSession>().ProcessPlayerDeath(); //wywołaj metodę z GameSession która przywraca gracza do życia i restartuje level
         }
     }
 }
