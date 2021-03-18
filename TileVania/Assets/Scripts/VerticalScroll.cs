@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VerticalScroll : MonoBehaviour
 {
-    float scrollRate = 0.2f;
+    float scrollRate = 0.1f;
 
     void Start()
     {
